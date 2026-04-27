@@ -30,10 +30,12 @@ app.use(router);
 
 const db = mysql.createConnection({
     host:        process.env.DB_HOST,
+    port:        process.env.DB_PORT || 3306,
     user:        process.env.DB_USER,
     password:    process.env.DB_PASSWORD,
     database:    process.env.DB_NAME,
     dateStrings: true,   // Return dates as 'YYYY-MM-DD' strings instead of Date objects
+    ssl:         { rejectUnauthorized: false }, // Allow self-signed certs from Aiven
 });
 
 db.connect((error) => {
