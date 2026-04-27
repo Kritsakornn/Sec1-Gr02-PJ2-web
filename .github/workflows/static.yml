@@ -37,6 +37,8 @@ jobs:
           mkdir -p deploy
           # Copy all HTML files to root of deploy folder
           cp sec1_gr02_fe_src/html/*.html deploy/
+          # Make GitHub Pages use error.html as the custom 404 page
+          cp deploy/error.html deploy/404.html
           # Copy static assets (CSS, JS, images) to deploy folder root
           cp sec1_gr02_fe_src/static/style.css deploy/
           cp sec1_gr02_fe_src/static/script.js deploy/
