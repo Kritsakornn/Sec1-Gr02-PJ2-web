@@ -19,13 +19,13 @@
 
 ## 👥 Meet the Team (Section 1, Group 02)
 
-| Photo | Name |
-| :---: | :--- |
-| <img src="sec1_gr02_fe_src/static/Images/ploo.jpg" width="100" style="border-radius: 50%;"> | **Chutchanun Jirapapongpun** |
-| <img src="sec1_gr02_fe_src/static/Images/goon.jpg" width="100" style="border-radius: 50%;"> | **Napat Tayommai** |
-| <img src="sec1_gr02_fe_src/static/Images/yeen.jpg" width="100" style="border-radius: 50%;"> | **Kritsakorn Thammas** |
-| <img src="sec1_gr02_fe_src/static/Images/pong.jpg" width="100" style="border-radius: 50%;"> | **Thanapat Wongthongtham** |
-| <img src="sec1_gr02_fe_src/static/Images/black.jpg" width="100" style="border-radius: 50%;"> | **Tantikorn Lapkloyma** |
+| Photo | Name | Student ID | Role |
+| :---: | :--- | :---: | :--- |
+| <img src="sec1_gr02_fe_src/static/Images/ploo.jpg" width="100" style="border-radius: 50%;"> | **Chutchanun Jirapapongpun** | 6788027 | Frontend / Design |
+| <img src="sec1_gr02_fe_src/static/Images/goon.jpg" width="100" style="border-radius: 50%;"> | **Napat Tayommai** | 6788127 | Frontend / Backend |
+| <img src="sec1_gr02_fe_src/static/Images/yeen.jpg" width="100" style="border-radius: 50%;"> | **Kritsakorn Thammas** | 6788129 | Backend / Design |
+| <img src="sec1_gr02_fe_src/static/Images/pong.jpg" width="100" style="border-radius: 50%;"> | **Thanapat Wongthongtham** | 6788145 | Frontend / Database |
+| <img src="sec1_gr02_fe_src/static/Images/black.jpg" width="100" style="border-radius: 50%;"> | **Tantikorn Lapkloyma** | 6788241 | Report / Reviewer |
 
 ## 📦 Project Structure
 - `/sec1_gr02_fe_src`: Frontend source code (HTML, CSS, JS, Images)
