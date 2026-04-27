@@ -1,9 +1,7 @@
 // ==========================================
 // CONFIG
 // ==========================================
-
-const BASE_URL = 'http://localhost:3030'; // backend base URL
-
+const BASE_URL = 'https://sec1-gr02-pj2-web.onrender.com'; // backend base URL
 
 // ==========================================
 // HELPERS
