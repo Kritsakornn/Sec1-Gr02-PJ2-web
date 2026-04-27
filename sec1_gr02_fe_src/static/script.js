@@ -23,11 +23,17 @@ const getImageUrl = (images, name, size = '200x200') =>
   `https://placehold.co/${size}/FFFFFF/DDDDDD?text=${encodeURIComponent(name)}`;
 
 const getIdFromURL = () => {
+  // GitHub Pages: read from ?id= query param
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('id')) return params.get('id');
+  // Fallback: read from URL path (Express server)
   const parts = window.location.pathname.split('/').filter(Boolean);
   return parts[parts.length - 1] || null;
 };
 
 const getProductIdFromURL = () => {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('id')) return params.get('id');
   if (!window.location.pathname.includes('edit-product')) return null;
   return getIdFromURL();
 };
@@ -216,7 +222,7 @@ function renderProductGrid(grid, products) {
 
   grid.innerHTML = products.map((p) => `
     <div class="product-card">
-      <a href="/detail/${p.ProductID}" style="text-decoration:none;color:inherit;width:100%;display:block">
+      <a href="productDetail.html?id=${p.ProductID}" style="text-decoration:none;color:inherit;width:100%;display:block">
         <div class="image-box">
           <img src="${getImageUrl(p.Images, p.ProductName)}" alt="${p.ProductName}" style="width:100%">
         </div>
@@ -377,7 +383,7 @@ function renderAdminRow(p) {
 
   // Clicking the row navigates to the edit page.
   row.addEventListener('click', () => {
-    window.location.href = `/edit-product/${p.ProductID}`;
+    window.location.href = `editProduct.html?id=${p.ProductID}`;
   });
 
   // Clicking the delete button shows a confirm dialog (does not navigate).
@@ -583,7 +589,7 @@ async function initEditProduct() {
       const res = await api.updateProduct(id, buildFormData());
       if (!res.error) {
         showToast('success', 'Product updated successfully!');
-        setTimeout(() => { window.location.href = '/product-management'; }, 1500);
+        setTimeout(() => { window.location.href = 'productManagement.html'; }, 1500);
       }
     } catch (err) {
       showToast('error', 'Failed to update product.');
@@ -615,7 +621,7 @@ async function initAddProduct() {
       const res = await api.createProduct(buildFormData());
       if (!res.error) {
         showToast('success', 'Product added successfully!');
-        setTimeout(() => { window.location.href = '/product-management'; }, 1500);
+        setTimeout(() => { window.location.href = 'productManagement.html'; }, 1500);
       }
     } catch (err) {
       showToast('error', 'Failed to add product.');
@@ -642,7 +648,7 @@ async function initAdminLogin() {
       const data = await api.adminLogin({ Username: username, myPassword: password });
       localStorage.setItem('adminID', data.AdminID);
       showToast('success', 'Login successful! Redirecting...');
-      setTimeout(() => { window.location.href = '/product-management'; }, 1500);
+      setTimeout(() => { window.location.href = 'productManagement.html'; }, 1500);
     } catch {
       showToast('error', 'Login failed. Please check your credentials.');
     }
@@ -757,7 +763,7 @@ async function runSearch() {
   const totalFields  = criteria.length; // 4
 
   if (filledFields === 0) {
-    window.location.href = '/product';
+    window.location.href = 'productPage.html';
     return;
   }
 
@@ -772,7 +778,7 @@ async function runSearch() {
   params.append('brand',      brand);
   params.append('ingredient', selectedIng);
 
-  window.location.href = `/product?${params.toString()}`;
+  window.location.href = `productPage.html?${params.toString()}`;
 }
 
 
@@ -792,7 +798,7 @@ function initNameSearch() {
     const grid = document.getElementById('product-grid');
 
     if (!grid) {
-      window.location.href = `/product?name=${encodeURIComponent(name)}`;
+      window.location.href = `productPage.html?name=${encodeURIComponent(name)}`;
       searchInput.value = '';
       return;
     }
