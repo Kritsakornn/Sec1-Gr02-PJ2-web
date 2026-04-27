@@ -2,7 +2,7 @@
 // CONFIG
 // ==========================================
 
-const BASE_URL = 'http://localhost:3030';
+const BASE_URL = 'https://sec1-gr02-pj2-web.onrender.com';
 
 
 // ==========================================
@@ -11,10 +11,10 @@ const BASE_URL = 'http://localhost:3030';
 
 const formatDate = (date) => {
   if (!date) return '-';
-  const d     = new Date(date);
-  const day   = String(d.getDate()).padStart(2, '0');
+  const d = new Date(date);
+  const day = String(d.getDate()).padStart(2, '0');
   const month = String(d.getMonth() + 1).padStart(2, '0');
-  const year  = String(d.getFullYear()).slice(-2);
+  const year = String(d.getFullYear()).slice(-2);
   return `${day}/${month}/${year}`;
 };
 
@@ -72,9 +72,9 @@ const api = {
 
   adminLogin: (credentials) =>
     fetch(`${BASE_URL}/admin/login`, {
-      method:  'POST',
+      method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify(credentials),
+      body: JSON.stringify(credentials),
     }).then(handleResponse),
 
   getIngredients: () =>
@@ -153,7 +153,7 @@ function showConfirm(title, message, onConfirm) {
 
   document.body.appendChild(overlay);
   overlay.querySelector('#confirm-cancel').onclick = () => overlay.remove();
-  overlay.querySelector('#confirm-ok').onclick     = () => { overlay.remove(); onConfirm(); };
+  overlay.querySelector('#confirm-ok').onclick = () => { overlay.remove(); onConfirm(); };
   overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
 }
 
@@ -239,11 +239,11 @@ async function initProductGrid() {
 
   grid.innerHTML = "<p style='grid-column:span 5;text-align:center;font-size:1.5rem'>Loading products...</p>";
 
-  const urlParams  = new URLSearchParams(window.location.search);
-  const name       = urlParams.get('name');
-  const minPrice   = urlParams.get('minPrice');
-  const maxPrice   = urlParams.get('maxPrice');
-  const brand      = urlParams.get('brand');
+  const urlParams = new URLSearchParams(window.location.search);
+  const name = urlParams.get('name');
+  const minPrice = urlParams.get('minPrice');
+  const maxPrice = urlParams.get('maxPrice');
+  const brand = urlParams.get('brand');
   const ingredient = urlParams.get('ingredient');
 
   try {
@@ -279,8 +279,8 @@ async function initProductGrid() {
 function renderProductDetail(container, p) {
   const list = p.Ingredients?.length
     ? (Array.isArray(p.Ingredients)
-        ? p.Ingredients
-        : p.Ingredients.split(',').map(s => s.trim()))
+      ? p.Ingredients
+      : p.Ingredients.split(',').map(s => s.trim()))
     : [];
 
   const ingredientsHTML = list.length ? `
@@ -332,7 +332,7 @@ function renderProductDetail(container, p) {
   `;
 
   const qty = container.querySelector('#qty');
-  container.querySelector('#plus').onclick  = () => { qty.value++; };
+  container.querySelector('#plus').onclick = () => { qty.value++; };
   container.querySelector('#minus').onclick = () => { if (qty.value > 1) qty.value--; };
 }
 
@@ -443,9 +443,9 @@ function initToggleDelete() {
     });
 
     // Visual feedback — highlight the button when delete mode is active.
-    btn.style.background    = deleteMode ? '#fcebeb' : '';
-    btn.style.borderColor   = deleteMode ? '#f09595' : '';
-    btn.style.color         = deleteMode ? '#a32d2d' : '';
+    btn.style.background = deleteMode ? '#fcebeb' : '';
+    btn.style.borderColor = deleteMode ? '#f09595' : '';
+    btn.style.color = deleteMode ? '#a32d2d' : '';
   });
 }
 
@@ -463,12 +463,12 @@ function formatLogTimestamp(dateStr) {
   if (!dateStr) return '-';
   const d = new Date(dateStr);
   if (isNaN(d.getTime())) return dateStr;   // Fallback: show raw string
-  const day   = String(d.getDate()).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
   const month = String(d.getMonth() + 1).padStart(2, '0');
-  const year  = d.getFullYear();
+  const year = d.getFullYear();
   const hours = String(d.getHours()).padStart(2, '0');
-  const mins  = String(d.getMinutes()).padStart(2, '0');
-  const secs  = String(d.getSeconds()).padStart(2, '0');
+  const mins = String(d.getMinutes()).padStart(2, '0');
+  const secs = String(d.getSeconds()).padStart(2, '0');
   return `${day}/${month}/${year} ${hours}:${mins}:${secs}`;
 }
 
@@ -526,17 +526,17 @@ async function initLogTable() {
 // ==========================================
 
 function populateEditForm(p) {
-  document.getElementById('productId').value   = p.ProductID;
+  document.getElementById('productId').value = p.ProductID;
   document.getElementById('productName').value = p.ProductName;
-  document.getElementById('price').value       = p.Price;
-  document.getElementById('brand').value       = p.Brand;
-  document.getElementById('mfgDate').value     = p.MFGDate?.split('T')[0] ?? '';
-  document.getElementById('expDate').value     = p.EXPDate?.split('T')[0] ?? '';
+  document.getElementById('price').value = p.Price;
+  document.getElementById('brand').value = p.Brand;
+  document.getElementById('mfgDate').value = p.MFGDate?.split('T')[0] ?? '';
+  document.getElementById('expDate').value = p.EXPDate?.split('T')[0] ?? '';
   document.getElementById('ingredients').value = p.Ingredients?.join(', ') ?? '';
 
   if (p.Images?.[0]?.ImageURL) {
     const img = document.getElementById('previewImage');
-    img.src           = p.Images[0].ImageURL;
+    img.src = p.Images[0].ImageURL;
     img.style.display = 'block';
   }
 }
@@ -544,10 +544,10 @@ function populateEditForm(p) {
 function buildFormData(includeAdmin = true) {
   const formData = new FormData();
   formData.append('ProductName', document.getElementById('productName').value);
-  formData.append('Price',       document.getElementById('price').value);
-  formData.append('Brand',       document.getElementById('brand').value);
-  formData.append('MFGDate',     document.getElementById('mfgDate').value);
-  formData.append('EXPDate',     document.getElementById('expDate').value);
+  formData.append('Price', document.getElementById('price').value);
+  formData.append('Brand', document.getElementById('brand').value);
+  formData.append('MFGDate', document.getElementById('mfgDate').value);
+  formData.append('EXPDate', document.getElementById('expDate').value);
   formData.append('Ingredients', document.getElementById('ingredients').value);
 
   if (includeAdmin) {
@@ -689,8 +689,8 @@ async function loadIngredients() {
 
 function initSearchOverlay() {
   const container = document.querySelector('.search-container');
-  const overlay   = document.getElementById('search-overlay');
-  const panel     = document.querySelector('.search-panel');
+  const overlay = document.getElementById('search-overlay');
+  const panel = document.querySelector('.search-panel');
   const searchBtn = document.getElementById('search-btn');
   if (!container || !overlay) return;
 
@@ -710,7 +710,7 @@ function initSearchOverlay() {
 }
 
 function initExpandableSearch() {
-  const box   = document.getElementById('expandable-search-box');
+  const box = document.getElementById('expandable-search-box');
   const input = document.getElementById('nav-search-input');
   if (!box || !input) return;
 
@@ -723,7 +723,7 @@ function initExpandableSearch() {
 function isSearchValid() {
   // If a "no criteria" search is allowed to return all results, 
   // the search is always valid.
-  return true; 
+  return true;
 }
 
 function initSearchValidation() {
@@ -740,11 +740,11 @@ function clearSearchInputs() {
   const minPrice = document.getElementById('min-price');
   const maxPrice = document.getElementById('max-price');
   const brandInput = document.getElementById('brand-input');
-  
+
   if (minPrice) minPrice.value = '';
   if (maxPrice) maxPrice.value = '';
   if (brandInput) brandInput.value = '';
-  
+
   // Uncheck all ingredient radio buttons
   document.querySelectorAll("input[name='ing']").forEach((radio) => {
     radio.checked = false;
@@ -752,15 +752,15 @@ function clearSearchInputs() {
 }
 
 async function runSearch() {
-  const minPrice    = document.getElementById('min-price')?.value.trim();
-  const maxPrice    = document.getElementById('max-price')?.value.trim();
-  const brand       = document.getElementById('brand-input')?.value.trim();
+  const minPrice = document.getElementById('min-price')?.value.trim();
+  const maxPrice = document.getElementById('max-price')?.value.trim();
+  const brand = document.getElementById('brand-input')?.value.trim();
   const selectedIngInput = [...document.querySelectorAll("input[name='ing']")].find(r => r.checked);
   const selectedIng = selectedIngInput ? selectedIngInput.parentElement.innerText.trim() : '';
 
   const criteria = [minPrice, maxPrice, brand, selectedIng];
   const filledFields = criteria.filter(Boolean).length;
-  const totalFields  = criteria.length; // 4
+  const totalFields = criteria.length; // 4
 
   if (filledFields === 0) {
     window.location.href = 'productPage.html';
@@ -773,9 +773,9 @@ async function runSearch() {
   }
 
   const params = new URLSearchParams();
-  params.append('minPrice',   minPrice);
-  params.append('maxPrice',   maxPrice);
-  params.append('brand',      brand);
+  params.append('minPrice', minPrice);
+  params.append('maxPrice', maxPrice);
+  params.append('brand', brand);
   params.append('ingredient', selectedIng);
 
   window.location.href = `productPage.html?${params.toString()}`;
@@ -788,7 +788,7 @@ async function runSearch() {
 
 function initNameSearch() {
   const searchInput = document.querySelector('.search-input');
-  const searchIcon  = document.querySelector('.icon-search');
+  const searchIcon = document.querySelector('.icon-search');
   if (!searchInput) return;
 
   const runNameSearch = async () => {
